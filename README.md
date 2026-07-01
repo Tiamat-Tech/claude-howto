@@ -854,6 +854,7 @@ Quick start:
 - [Skills Repository](https://github.com/luongnv89/skills) - Collection of ready-to-use skills
 - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
 - [Boris Cherny's Claude Code Workflow](https://x.com/bcherny/status/2007179832300581177) - The creator of Claude Code shares his systematized workflow: parallel agents, shared CLAUDE.md, Plan mode, slash commands, subagents, and verification hooks for autonomous long-running sessions.
+- [Vexilo · A field guide to Claude Code](https://vexilo.app/?lang=en) - Visual interactive index of 31 agents · 99 commands · 123 skills · 13 rules, organized around the 5-step workflow (Research → Plan → Test-first → Security → Commit). One-click "Teach Claude this handbook" feeds the whole index into a local Claude session in 30 seconds. ([companion repo](https://github.com/lilhawk7077/claude-code-resources))
 
 </details>
 
