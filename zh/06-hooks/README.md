@@ -42,14 +42,28 @@ chmod +x ~/.claude/hooks/*.sh
 ```json
 {
   "hooks": {
-    "PreToolUse": [{
-      "matcher": "Write",
-      "hooks": ["~/.claude/hooks/format-code.sh"]
-    }],
-    "PostToolUse": [{
-      "matcher": "Write",
-      "hooks": ["~/.claude/hooks/security-scan.sh"]
-    }]
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/format-code.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/security-scan.sh"
+          }
+        ]
+      }
+    ]
   }
 }
 ```
