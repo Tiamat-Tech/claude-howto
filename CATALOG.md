@@ -144,7 +144,7 @@ Claude Code supports 6 permission modes that control how tool use is authorized.
 
 Specialized AI assistants with isolated contexts for specific tasks.
 
-> **Nested spawning (v2.1.172)**: Subagents can spawn their own subagents, nested up to 5 levels deep. Earlier versions did not allow nesting. See [04-subagents/README.md](04-subagents/README.md#restrict-spawnable-subagents) for the `Agent(agent_type)` syntax that restricts which subagents a given subagent may spawn.
+> **Nested spawning is opt-in (v2.1.217)**: As of v2.1.217, subagents do not spawn their own subagents by default. Set `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` to allow nesting, up to the depth you configure. (From v2.1.172 through v2.1.216, subagents nested by default, up to 5 levels deep; v2.1.217 made that opt-in.) See [04-subagents/README.md](04-subagents/README.md#restrict-spawnable-subagents) for the `Agent(agent_type)` syntax that restricts which subagents a given subagent may spawn.
 
 ### Built-in Subagents
 
@@ -545,9 +545,11 @@ chmod +x ~/.claude/hooks/*.sh
 
 ---
 
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+**Last Updated**: July 22, 2026
+**Claude Code Version**: 2.1.217
 **Sources**:
+- https://code.claude.com/docs/en/sub-agents
+- https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
 - https://code.claude.com/docs/en/overview
 - https://code.claude.com/docs/en/commands
 - https://code.claude.com/docs/en/hooks

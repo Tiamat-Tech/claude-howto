@@ -241,6 +241,8 @@ Checkpoints have the following limitations:
 - **External changes NOT tracked** - Changes made outside Claude Code (in your editor, terminal, etc.) are not captured
 - **Not a replacement for version control** - Use git for permanent, auditable changes to your codebase
 
+> **v2.1.216 update**: `/rewind` no longer restores or deletes files through symlinks or hard links at tracked paths. If a tracked path resolves through a symlink or hard link, rewind skips it rather than following the link, and it reports how many paths it skipped for this reason.
+
 ## Troubleshooting
 
 ### Missing Checkpoints
@@ -328,8 +330,8 @@ Remember: checkpoints are not a replacement for git. Use checkpoints for rapid e
 
 ---
 
-**Last Updated**: July 11, 2026
-**Claude Code Version**: 2.1.206
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
 - https://code.claude.com/docs/en/checkpointing
 - https://code.claude.com/docs/en/settings

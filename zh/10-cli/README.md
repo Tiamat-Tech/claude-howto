@@ -199,7 +199,7 @@ claude --disallowedTools "Bash(rm -rf:*)" "Bash(git push --force:*)"
 | `--verbose` | 启用详细日志 |  | `claude --verbose` |
 | `--include-partial-messages` | 包含流式事件 | 需要 `stream-json` | `claude -p --output-format stream-json --include-partial-messages "query"` |
 | `--json-schema` | 获取符合 schema 的 JSON 输出 |  | `claude -p --json-schema '{"type":"object"}' "query"` |
-| `--max-budget-usd` | 打印模式最大花费 |  | `claude -p --max-budget-usd 5.00 "query"` |
+| `--max-budget-usd` | 打印模式最大花费。自 v2.1.217 起，达到上限后也会停止正在运行的后台子代理，并拒绝新的子代理生成请求（此前后台代理在超出上限后仍会继续运行） |  | `claude -p --max-budget-usd 5.00 "query"` |
 
 ### 输出格式示例
 

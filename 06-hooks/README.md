@@ -119,6 +119,8 @@ The `if` field sits at the **hook-handler level** — a sibling of `type` and `c
 
 Examples of valid `if` patterns: `Edit(src/**)` (edits under `src/`), `Read(~/.ssh/**)` (reads of any SSH key), `Read(.env)` (any `.env` at or below the current directory), `Bash(git push *)` (only `git push` subcommands).
 
+> **v2.1.214 update**: A single-segment `dir/**` pattern in a hook `if` condition (like `Edit(src/**)`) now matches only `<cwd>/dir` — not that directory at any depth in the tree. Previously `src/**` also matched `foo/src/**`. Use `**/dir/**` if you need any-depth matching. **Important**: this narrowing applies only to hook `if:` conditions and allow-rule auto-approval — deny/ask permission rules still match `dir/**` at any depth.
+
 ## Hook Types
 
 Claude Code supports five hook types:
@@ -237,7 +239,7 @@ Claude Code supports **30 hook events**:
 
 | Event | When Triggered | Matcher Input | Can Block | Common Use |
 |-------|---------------|---------------|-----------|------------|
-| **SessionStart** | Session begins/resumes/clear/compact | startup/resume/clear/compact | No | Environment setup |
+| **SessionStart** | Session begins/resumes/clear/compact | startup/resume/clear/compact/fork | No | Environment setup |
 | **Setup** | Initial environment setup (one-time per session) | (none) | No | Provision tooling, install deps |
 | **InstructionsLoaded** | After CLAUDE.md or rules file loaded | (none) | No | Modify/filter instructions |
 | **UserPromptSubmit** | User submits prompt | (none) | Yes | Validate prompts |
@@ -450,7 +452,9 @@ Runs when a subagent begins execution. The matcher input is the agent type name,
 
 Runs when session starts or resumes. Can persist environment variables.
 
-**Matchers:** `startup`, `resume`, `clear`, `compact`
+**Matchers:** `startup`, `resume`, `clear`, `compact`, `fork`
+
+> **v2.1.214 update**: A forked session now reports source `"fork"` — previously it reported `"resume"`.
 
 **Special feature:** Use `CLAUDE_ENV_FILE` to persist environment variables (also available in `CwdChanged` and `FileChanged` hooks):
 
@@ -1505,15 +1509,8 @@ Edit `~/.claude/settings.json` or `.claude/settings.json` with the hook configur
 
 ---
 
-**Last Updated**: July 11, 2026
-**Claude Code Version**: 2.1.206
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
 - https://code.claude.com/docs/en/hooks
-- https://code.claude.com/docs/en/permissions
-- https://code.claude.com/docs/en/changelog
-- https://code.claude.com/docs/en/changelog#2-1-176
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.139
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.145
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.152
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.153
-**Compatible Models**: Claude Sonnet 5, Claude Sonnet 4.6, Claude Opus 4.8, Claude Haiku 4.5
+- https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md

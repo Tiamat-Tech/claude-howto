@@ -836,6 +836,16 @@ Claude Code caps subagent spawns at **200 per session** by default, to stop runa
 export CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION=200
 ```
 
+Two more environment variables cap subagent fan-out:
+
+- `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (v2.1.217) - Maximum number of subagents running **concurrently** at once. Default: 20.
+- `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` (v2.1.217) - Maximum **nesting depth** for subagents spawning their own subagents. Nested spawning is disabled by default; set this to opt in (see [Key Behaviors](#key-behaviors)).
+
+```bash
+export CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS=20
+export CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=5
+```
+
 ---
 
 ## Architecture
@@ -919,7 +929,7 @@ graph TB
 
 ### Key Behaviors
 
-- **Nested spawning (up to 5 levels)** - As of v2.1.172, subagents can spawn their own subagents, nested up to 5 levels deep. Earlier versions did not allow any nesting. Use the `Agent(agent_type)` restriction syntax (see [Restrict Spawnable Subagents](#restrict-spawnable-subagents)) to control which subagents a given subagent may spawn
+- **No nested spawning by default (v2.1.217)** - As of v2.1.217, subagents do not spawn their own subagents by default. Set `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` to opt into nested spawning, up to the depth you configure. (History: from v2.1.172 through v2.1.216, subagents could nest by default, up to 5 levels deep; v2.1.217 made that opt-in.) Use the `Agent(agent_type)` restriction syntax (see [Restrict Spawnable Subagents](#restrict-spawnable-subagents)) to control which subagents a given subagent may spawn
 - **Background permissions** - Background subagents auto-deny any permissions that are not pre-approved
 - **Backgrounding** - Press `Ctrl+B` to background a currently running task
 - **Transcripts** - Subagent transcripts are stored at `~/.claude/projects/{project}/{sessionId}/subagents/agent-{agentId}.jsonl`
@@ -1260,12 +1270,12 @@ See the OpenTelemetry section in [Advanced Features → Telemetry](../09-advance
 
 ---
 
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+**Last Updated**: July 22, 2026
+**Claude Code Version**: 2.1.217
 **Sources**:
-- https://code.claude.com/docs/en/subagents
-- https://code.claude.com/docs/en/cli-reference
+- https://code.claude.com/docs/en/sub-agents
 - https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
+- https://code.claude.com/docs/en/cli-reference
 - https://code.claude.com/docs/en/agent-teams
 - https://code.claude.com/docs/en/changelog#2-1-172
 - https://code.claude.com/docs/en/changelog

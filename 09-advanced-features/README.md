@@ -1976,6 +1976,7 @@ claude --no-sandbox    # Disable sandboxing
 | `sandbox.socatPath` | (v2.1.133+, Linux/WSL) Path to the `socat` binary. Default: `$PATH` lookup. |
 | `sandbox.credentials` | (v2.1.187+) Block sandboxed commands from reading credential files and secret environment variables. |
 | `sandbox.allowAppleEvents` | (v2.1.181+, macOS) Opt in to let sandboxed commands send Apple Events. |
+| `sandbox.filesystem.disabled` | (v2.1.216+) Skip filesystem isolation entirely while keeping network isolation enforced — useful when file sandboxing breaks tooling but network egress control must stay active. Only honored from user settings, managed settings, or `--settings`; project settings can't set it. |
 
 **Linux/WSL binary paths** (v2.1.133+) — point Claude Code at non-standard install locations:
 
@@ -2425,24 +2426,8 @@ For more information about Claude Code and related features:
 
 ---
 
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
-- https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
-- https://docs.anthropic.com/en/docs/claude-code/settings
-- https://code.claude.com/docs/en/troubleshooting
-- https://code.claude.com/docs/en/changelog#2-1-175
-- https://code.claude.com/docs/en/permission-modes
-- https://code.claude.com/docs/en/interactive-mode
 - https://code.claude.com/docs/en/settings
-- https://code.claude.com/docs/en/cli-reference
-- https://code.claude.com/docs/en/model-config
-- https://www.anthropic.com/news/claude-opus-4-8
-- https://claude.com/blog/introducing-routines-in-claude-code
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.117
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.139
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.154
-- https://code.claude.com/docs/en/overview
-- https://code.claude.com/docs/en/sub-agents
-- https://code.claude.com/docs/en/commands
-**Compatible Models**: Claude Sonnet 5, Claude Sonnet 4.6, Claude Opus 4.8, Claude Haiku 4.5
+- https://code.claude.com/docs/en/sandboxing

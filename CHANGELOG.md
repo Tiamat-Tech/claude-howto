@@ -1,5 +1,98 @@
 # Changelog
 
+## [v2.1.217] — 2026-07-22
+
+### Synced to Claude Code v2.1.217
+
+Bumps tutorial coverage from the v2.1.212 baseline (2026-07-18 sync) to
+v2.1.217 (v2.1.213 was skipped upstream — the changelog and GitHub releases
+both jump 2.1.212 → 2.1.214), plus a repo-internal accuracy audit.
+
+### Fixed
+
+- **Nested-subagent-spawning claim reversed (v2.1.217)** — `04-subagents/README.md`
+  and `CATALOG.md` stated as current behavior that "subagents can spawn their
+  own subagents, nested up to 5 levels deep" (true v2.1.172–v2.1.216). As of
+  v2.1.217 this is off by default; opt in with
+  `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH`. Both files now lead with current
+  behavior and keep the historical note.
+- **Stale `--enable-auto-mode` flag** — removed in v2.1.111 (auto mode moved
+  into the default `Shift+Tab` cycle; `--permission-mode auto` is the current
+  way to start in it), but `10-cli/README.md` still presented it as a live
+  flag in four spots and `QUICK_REFERENCE.md` used it in three. All seven
+  updated to `--permission-mode auto`.
+- **Import-depth contradiction ("5 levels" vs "4 hops")** — two "5 levels"
+  instances survived in `02-memory/README.md`'s Best Practices area after the
+  2026-07-18 sync fixed two others; both now read "4 hops," matching the rest
+  of the file.
+- **Sonnet-5-less models table** — `claude_concepts_guide.md`'s "Models &
+  Reasoning Effort" table omitted Claude Sonnet 5 despite the file's own
+  footer already listing it as compatible. Added as the default row for
+  Pro/Team Standard/Enterprise.
+- **`config-examples.json` fabricated schema** — all 11 example configs used
+  invented fields (`mode: "unrestricted"/"confirm"`, `planning.*`,
+  `extendedThinking.*`, `headless.*`, `checkpoints.autoCheckpoint`) that don't
+  exist in the real settings schema, plus a stale `claude-opus-4-7` model ID.
+  Rewritten to use real `settings.json` keys (`permissions.defaultMode`,
+  `permissions.allow`/`deny`, `env`, `hooks`, `fileCheckpointingEnabled`,
+  `sandbox.*`) and current model IDs.
+- **`brand-voice` skill vs. its README example** — the actual
+  `03-skills/brand-voice/SKILL.md` (`name: brand-voice-consistency`,
+  user-invocable) contradicted `03-skills/README.md`'s "Example 4" walkthrough
+  (`name: brand-voice`, `user-invocable: false`). Aligned the skill file to
+  the README's background-knowledge framing.
+- **CLAUDE.md length guidance conflict** — `03-skills/claude-md/SKILL.md`
+  ("<300 lines, ideally <100") vs. `02-memory/README.md` ("<500 lines").
+  Unified on "keep it under a few hundred lines; shorter is better" in both
+  files (no official specific limit exists — both prior numbers were
+  editorial).
+
+### Added
+
+- **New subagent caps (v2.1.217)** — a cap on concurrently running subagents
+  (default 20, `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`) alongside the nesting
+  depth control above. Documented in `04-subagents/README.md`,
+  `10-cli/README.md`, and `QUICK_REFERENCE.md`.
+- **`--max-budget-usd` now halts background subagents (v2.1.217)** — the spend
+  cap previously only blocked new spawns; it now also halts already-running
+  background subagents. Documented in `10-cli/README.md`.
+- **Hook `if:` glob scope narrowed (v2.1.214)** — single-segment `dir/**` hook
+  `if:` conditions now match only `<cwd>/dir` (use `**/dir/**` for any-depth);
+  deny/ask permission rules are unaffected. Documented in `06-hooks/README.md`.
+- **SessionStart `"fork"` source (v2.1.214)** — forked sessions now report
+  source `"fork"` instead of `"resume"`. Documented in `06-hooks/README.md`.
+- **`sandbox.filesystem.disabled` (v2.1.216)** — skips filesystem isolation
+  while keeping network egress control enforced. Documented in
+  `09-advanced-features/README.md` and `10-cli/README.md`.
+- **`/rewind` symlink/hard-link protection (v2.1.216)** — no longer restores
+  or deletes files through symlinks or hard links at tracked paths; reports
+  how many paths were skipped. Documented in `08-checkpoints/README.md`.
+- **Auto-memory `modified` timestamp + non-blocking `/memory` editor** — an
+  ISO `modified` timestamp on memory-file frontmatter (v2.1.214), and `/memory`
+  no longer blocking the session while its GUI editor is open (v2.1.216).
+  Documented in `02-memory/README.md`.
+- **CLI/settings batch (v2.1.214–v2.1.217)** — `emojiCompletionEnabled`,
+  `FORCE_HYPERLINK=0`, `CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH`, `--settings`
+  files capped at 2 MiB, and permission hardening (Docker/Podman
+  daemon-redirect flags, `file -m`/`--magic-file`/`-f`/`--files-from`,
+  10,000+ character commands) documented in `10-cli/README.md`. `/context`'s
+  over-context-window warning and `/compact` failures now displaying as
+  errors (v2.1.216) documented in `01-slash-commands/README.md`.
+- **`/verify` and `/code-review` explicit-invocation-only (v2.1.215)** —
+  additive note in `03-skills/README.md` and `QUICK_REFERENCE.md`; the repo
+  never claimed auto-invocation.
+
+### Notes
+
+- `QUICK_REFERENCE.md`'s `--enable-auto-mode` / `--permission-mode auto`
+  inconsistency was resolved in favor of the latter after confirming against
+  the live CLI reference that the former was removed in v2.1.111.
+- Translation mirrors (`vi`/`ja`/`zh`/`uk`) were checked for the P0/P1 claims
+  above; most translated `04-subagents/README.md` and `CATALOG.md` copies
+  either predate the nested-spawning feature or don't carry the affected
+  section, so no mirrored edit was needed there. `10-cli/README.md`'s
+  `--max-budget-usd` clarifier was mirrored into all four languages.
+
 ## [v2.1.212] — 2026-07-18
 
 ### Synced to Claude Code v2.1.212

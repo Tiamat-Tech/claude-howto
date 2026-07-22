@@ -115,7 +115,7 @@ If you relied on this pattern, switch to the `/memory` command or conversational
 
 ### The `/memory` Command
 
-The `/memory` command provides direct access to edit your CLAUDE.md memory files within Claude Code sessions. It opens your memory files in your system editor for comprehensive editing.
+The `/memory` command provides direct access to edit your CLAUDE.md memory files within Claude Code sessions. It opens your memory files in your system editor for comprehensive editing. When the file opens in a GUI editor, the session no longer blocks while the file stays open, so you can keep working in parallel (v2.1.216); terminal editors like Vim still take over the terminal until you exit.
 
 **Usage:**
 
@@ -449,6 +449,7 @@ Auto memory is a persistent directory where Claude automatically records learnin
 - **Topic files**: Optional additional files for specific subjects (e.g., `debugging.md`, `api-conventions.md`)
 - **Loading behavior**: The first 200 lines of `MEMORY.md` (or first 25KB, whichever comes first) are loaded into context at session start. Topic files are loaded on demand, not at startup.
 - **Read/write**: Claude reads and writes memory files during sessions as it discovers patterns and project-specific knowledge
+- **Frontmatter**: Files that begin with YAML frontmatter get a `modified` field — an ISO 8601 timestamp Claude Code records each time it writes the file (v2.1.214)
 
 ### Auto Memory Architecture
 
@@ -913,7 +914,7 @@ graph LR
   - **Directory memory**: Module-specific rules and overrides
 
 - **Leverage imports**: Use `@path/to/file` syntax to reference existing documentation
-  - Supports up to 5 levels of recursive nesting
+  - Supports a maximum depth of 4 hops for recursive imports
   - Avoids duplication across memory files
   - Example: `See @README.md for project overview`
 
@@ -935,13 +936,13 @@ graph LR
 
 - **Don't be vague**: Avoid generic statements like "follow best practices" or "write good code"
 
-- **Don't make it too long**: Keep individual memory files focused and under 500 lines
+- **Don't make it too long**: Keep individual memory files focused — keep it under a few hundred lines; shorter is better
 
 - **Don't over-organize**: Use hierarchy strategically; don't create excessive subdirectory overrides
 
 - **Don't forget to update**: Stale memory can cause confusion and outdated practices
 
-- **Don't exceed nesting limits**: Memory imports support up to 5 levels of nesting
+- **Don't exceed nesting limits**: Memory imports support a maximum depth of 4 hops
 
 ### Memory Management Tips
 
@@ -1148,15 +1149,8 @@ Auto Memory is a separate mechanism (`~/.claude/projects/<project>/memory/`), no
 - [Official Memory Docs](https://code.claude.com/docs/en/memory) - Anthropic documentation
 
 ---
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
 - https://code.claude.com/docs/en/memory
-- https://code.claude.com/docs/en/settings
-- https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
-- https://docs.anthropic.com/en/docs/claude-code/settings
-- https://code.claude.com/docs/en/cli-reference
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.117
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.144
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.145
-**Compatible Models**: Claude Sonnet 5, Claude Sonnet 4.6, Claude Opus 4.8, Claude Haiku 4.5

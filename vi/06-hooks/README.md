@@ -147,7 +147,7 @@ Claude Code hỗ trợ **25 sự kiện hook**:
 
 | Sự Kiện | Khi Được Kích Hoạt | Matcher Input | Có Chặn | Sử Dụng Phổ Biến |
 |-------|---------------|---------------|-----------|------------|
-| **SessionStart** | Phiên bắt đầu/tiếp tục/xóa/dồn | startup/resume/clear/compact | Không | Thiết lập môi trường |
+| **SessionStart** | Phiên bắt đầu/tiếp tục/xóa/dồn/fork | startup/resume/clear/compact/fork | Không | Thiết lập môi trường |
 | **InstructionsLoaded** | Sau khi CLAUDE.md hoặc file rules được tải | (none) | Không | Sửa đổi/bộ lọc hướng dẫn |
 | **UserPromptSubmit** | Người dùng gửi prompt | (none) | Có | Xác thực prompts |
 | **PreToolUse** | Trước khi thực thi công cụ | Tên công cụ | Có (allow/deny/ask) | Xác thực, sửa đổi đầu vào |
@@ -309,7 +309,9 @@ Chạy khi một subagent bắt đầu thực thi. Matcher input là tên loại
 
 Chạy khi phiên bắt đầu hoặc tiếp tục. Có thể persist các biến môi trường.
 
-**Matchers:** `startup`, `resume`, `clear`, `compact`
+**Matchers:** `startup`, `resume`, `clear`, `compact`, `fork`
+
+> **Cập nhật v2.1.214**: Các phiên được tạo qua fork giờ báo cáo nguồn là `"fork"` thay vì `"resume"` như trước đây.
 
 **Tính năng đặc biệt:** Sử dụng `CLAUDE_ENV_FILE` để persist các biến môi trường (cũng có sẵn trong các hooks `CwdChanged` và `FileChanged`):
 

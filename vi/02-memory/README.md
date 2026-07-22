@@ -904,7 +904,7 @@ graph LR
   - **Directory memory**: Các quy tắc và ghi đè cụ thể theo module
 
 - **Tận dụng imports**: Sử dụng cú pháp `@path/to/file` để tham khảo tài liệu hiện có
-  - Hỗ trợ lên đến 5 cấp lồng ghép đệ quy
+  - Hỗ trợ tối đa 4 chặng đệ quy (recursive hops)
   - Tránh nhân đôi qua các file bộ nhớ
   - Ví dụ: `See @README.md for project overview`
 
@@ -932,7 +932,7 @@ graph LR
 
 - **Đừng quên cập nhật**: Bộ nhớ cũ có thể gây nhầm lẫn và thực hành lỗi thời
 
-- **Đừng vượt quá giới hạn lồng**: Bộ nhớ import hỗ trợ lên đến 5 cấp lồng
+- **Đừng vượt quá giới hạn lồng**: Bộ nhớ import hỗ trợ tối đa 4 chặng đệ quy
 
 ### Mẹo Quản Lý Bộ Nhớ
 

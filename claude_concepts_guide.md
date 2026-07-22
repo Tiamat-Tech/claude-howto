@@ -3129,6 +3129,7 @@ Claude Code supports the following models with adaptive reasoning effort:
 
 | Model | Context Window | Effort Levels | Default Effort (Claude Code) |
 |-------|----------------|---------------|------------------------------|
+| Claude Sonnet 5 | 1M tokens (native) | `low`, `medium`, `high`, `max` | `high` — default model for Pro/Team Standard/Enterprise since v2.1.197 |
 | Claude Opus 4.8 | 1M tokens (native) | `low`, `medium`, `high`, `xhigh`, `max` | `high` (since v2.1.154) |
 | Claude Opus 4.7 (legacy) | 1M tokens (native) | `low`, `medium`, `high`, `xhigh`, `max` | `xhigh` (since Opus 4.7 launch, 2026-04-16) |
 | Claude Sonnet 4.6 | 1M tokens | `low`, `medium`, `high`, `max` | `high` for Pro/Max subscribers (raised from `medium` in v2.1.117) |
@@ -3148,16 +3149,9 @@ Claude Code supports the following models with adaptive reasoning effort:
 - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
 
 ---
-**Last Updated**: July 11, 2026
-**Claude Code Version**: 2.1.206
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
-- https://code.claude.com/docs/en/overview
-- https://code.claude.com/docs/en/hooks
-- https://code.claude.com/docs/en/model-config
-- https://code.claude.com/docs/en/permission-modes
-- https://code.claude.com/docs/en/skills
-- https://code.claude.com/docs/en/changelog#2-1-172
-- https://platform.claude.com/docs/en/about-claude/models/overview
-- https://www.anthropic.com/news/claude-opus-4-8
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.154
+- https://www.anthropic.com/news/claude-sonnet-5
+- https://code.claude.com/docs/en/cli-reference
 **Compatible Models**: Claude Sonnet 5, Claude Sonnet 4.6, Claude Opus 4.8, Claude Haiku 4.5

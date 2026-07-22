@@ -31,9 +31,9 @@ Built-in commands are shortcuts for common actions. There are **60+ built-in com
 | `/chrome` | Configure Chrome browser integration |
 | `/clear` | Clear conversation (aliases: `/reset`, `/new`) |
 | `/color [color\|default]` | Set prompt bar color. Bare `/color` (no args) picks a random session color (v2.1.128+); pass a color name or hex to set explicitly. |
-| `/compact [instructions]` | Compact conversation with optional focus instructions |
+| `/compact [instructions]` | Compact conversation with optional focus instructions. A failed compact now displays as an error in the UI instead of silently doing nothing (v2.1.216) |
 | `/config` | Open Settings (alias: `/settings`) |
-| `/context` | Visualize context usage as colored grid |
+| `/context` | Visualize context usage as colored grid. Shows an explicit warning when usage is over the context window limit (v2.1.216) |
 | `/copy [N]` | Copy assistant response to clipboard; `w` writes to file |
 | `/cost` | Typing-shortcut alias for `/usage` — opens the cost tab (v2.1.118+) |
 | `/desktop` | Continue in Desktop app (alias: `/app`) |
@@ -633,8 +633,8 @@ If both exist with the same name, the **skill takes precedence**. Remove one or 
 
 ---
 
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
 - https://code.claude.com/docs/en/slash-commands
 - https://code.claude.com/docs/en/skills

@@ -131,7 +131,7 @@ claude -r "session"    # Resume session by name/ID
 | **Git Worktrees** | Built-in | `/worktree` |
 | **Auto Memory** | Built-in | Auto-saves to CLAUDE.md |
 | **Task List** | Built-in | `/task list` |
-| **Bundled Skills (10)** | Built-in | `/batch`, `/claude-api`, `/code-review`, `/simplify` *(cleanup-only review; distinct from `/code-review` again since v2.1.154)*, `/debug`, `/fewer-permission-prompts`, `/loop`, `/run` *(v2.1.145+)*, `/run-skill-generator` *(v2.1.145+)*, `/verify` *(v2.1.145+)* |
+| **Bundled Skills (10)** | Built-in | `/batch`, `/claude-api`, `/code-review` *(explicit invocation only since v2.1.215 — Claude won't trigger this on its own)*, `/simplify` *(cleanup-only review; distinct from `/code-review` again since v2.1.154)*, `/debug`, `/fewer-permission-prompts`, `/loop`, `/run` *(v2.1.145+)*, `/run-skill-generator` *(v2.1.145+)*, `/verify` *(v2.1.145+; explicit invocation only since v2.1.215 — Claude won't trigger this on its own)* |
 
 ---
 
@@ -201,7 +201,7 @@ chmod +x ~/.claude/hooks/*.sh
 # - Security scanning: security-scan.sh
 
 # Auto Mode for fully autonomous workflows
-claude --enable-auto-mode -p "Refactor and test the auth module"
+claude --permission-mode auto -p "Refactor and test the auth module"
 # Or cycle modes interactively with Shift+Tab
 ```
 
@@ -232,7 +232,7 @@ claude -p "Run all tests and generate report"
 claude -p "Run tests" --permission-mode dontAsk
 
 # With Auto Mode for fully autonomous CI tasks
-claude --enable-auto-mode -p "Run tests and fix failures"
+claude --permission-mode auto -p "Run tests and fix failures"
 
 # With hooks for automation
 # See 09-advanced-features/README.md
@@ -407,10 +407,10 @@ cp -r 03-skills/code-review-specialist ~/.claude/skills/
 | **Keyboard Customization** | Custom keybindings | `/keybindings` command |
 | **/usage-credits** | Configure extra usage limits (renamed from `/extra-usage` in v2.1.144; old name still works as alias) | `/usage-credits` |
 | **/run** *(v2.1.145+)* | Launch this project's app to see a change running | `/run` |
-| **/verify** *(v2.1.145+)* | Build, run, and observe the app to confirm a fix works | `/verify` |
+| **/verify** *(v2.1.145+)* | Build, run, and observe the app to confirm a fix works (explicit invocation only since v2.1.215 — Claude won't trigger this on its own) | `/verify` |
 | **/run-skill-generator** *(v2.1.145+)* | Teach `/run`/`/verify` how to handle a specific project | `/run-skill-generator` |
 | **Subagent Output Scanning** *(v2.1.210+)* | Scans subagent reports for prompt-injection patterns and neutralizes them | On by default, no opt-out |
-| **Session-Wide Spawn Caps** *(v2.1.212)* | 200/session limits on WebSearch calls and subagent spawns, to stop runaway loops | `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`, `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`; `/clear` resets |
+| **Session-Wide Spawn Caps** *(v2.1.212, extended v2.1.217)* | 200/session limits on WebSearch calls and subagent spawns; v2.1.217 added a concurrent-subagent cap (default 20) and turned nested subagent spawning off by default (previously allowed up to 5 levels since v2.1.172) | `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`, `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`, `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` (default 20), `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` (opt back into nesting); `/clear` resets |
 | **Screen Reader Mode** *(v2.1.208)* | Plain-text rendering mode for screen readers | `--ax-screen-reader` flag, `CLAUDE_AX_SCREEN_READER=1`, or `"axScreenReader": true` in settings |
 
 ---
@@ -456,7 +456,7 @@ echo $GITHUB_TOKEN
 | Event automation | Hook (29 events, 5 types) | `06-hooks/pre-commit.sh` |
 | Complete solution | Plugin (+ LSP support) | `07-plugins/pr-review/` |
 | Safe experiment | Checkpoint | `08-checkpoints/checkpoint-examples.md` |
-| Fully autonomous | Auto Mode | `--enable-auto-mode` or `Shift+Tab` |
+| Fully autonomous | Auto Mode | `--permission-mode auto` or `Shift+Tab` |
 | Chat integrations | Channels | `--channels` (Discord, Telegram) |
 | CI/CD pipeline | CLI | `10-cli/README.md` |
 
@@ -513,14 +513,10 @@ Getting started checklist:
 **This Card**: Keep it handy for quick reference!
 
 ---
-**Last Updated**: July 18, 2026
-**Claude Code Version**: 2.1.212
+
+**Last Updated**: 2026-07-22
+**Claude Code Version**: 2.1.217
 **Sources**:
-- https://code.claude.com/docs/en/overview
-- https://code.claude.com/docs/en/hooks
-- https://code.claude.com/docs/en/commands
-- https://code.claude.com/docs/en/permission-modes
+- https://code.claude.com/docs/en/cli-reference
 - https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.153
-- https://github.com/anthropics/claude-code/releases/tag/v2.1.154
 **Compatible Models**: Claude Sonnet 5, Claude Sonnet 4.6, Claude Opus 4.8, Claude Haiku 4.5

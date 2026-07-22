@@ -203,7 +203,7 @@ claude --disallowedTools "Bash(rm -rf:*)" "Bash(git push --force:*)"
 | `--verbose` | Увімкнути детальне логування | | `claude --verbose` |
 | `--include-partial-messages` | Включити потокові (streaming) події | Потребує `stream-json` | `claude -p --output-format stream-json --include-partial-messages "query"` |
 | `--json-schema` | Отримати валідований JSON за схемою | | `claude -p --json-schema '{"type":"object"}' "query"` |
-| `--max-budget-usd` | Максимальні витрати для print mode | | `claude -p --max-budget-usd 5.00 "query"` |
+| `--max-budget-usd` | Максимальні витрати для print mode. Починаючи з v2.1.217, після досягнення ліміту також зупиняються фонові subagent-и, що виконуються, і забороняється запуск нових (раніше фонові агенти продовжували працювати після перевищення ліміту) | | `claude -p --max-budget-usd 5.00 "query"` |
 
 ### Приклади формату виводу
 
@@ -320,7 +320,7 @@ claude -r "feature-auth" --fork-session "test with different architecture"
 | `--channels` | Підписка на MCP channel plugins | `claude --channels discord` |
 | `--tmux` | Створити tmux-сесію для worktree | `claude --tmux` |
 | `--fork-session` | Створити новий ID сесії при відновленні | `claude --resume abc --fork-session` |
-| `--max-budget-usd` | Максимальні витрати (print mode) | `claude -p --max-budget-usd 5.00 "query"` |
+| `--max-budget-usd` | Максимальні витрати (print mode); також зупиняє фонові subagent-и при досягненні ліміту (v2.1.217) | `claude -p --max-budget-usd 5.00 "query"` |
 | `--json-schema` | Валідований JSON-вивід | `claude -p --json-schema '{"type":"object"}' "q"` |
 
 ### Приклади розширених функцій
